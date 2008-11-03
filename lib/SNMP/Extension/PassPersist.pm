@@ -187,7 +187,7 @@ sub run {
 # add_oid_entry()
 # -------------
 sub add_oid_entry {
-    my ($self, $oid, ) = @_;
+    my ($self, $oid, $type, $value) = @_;
 }
 
 
