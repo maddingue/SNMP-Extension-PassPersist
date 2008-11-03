@@ -245,6 +245,7 @@ sub getnext_oid {
 # set_oid()
 # -------
 sub set_oid {
+    my ($self, $req_oid, $value) = @_;
     return SNMP_NOT_WRITABLE
 }
 
