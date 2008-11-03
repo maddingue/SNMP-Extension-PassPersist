@@ -188,6 +188,7 @@ sub run {
 # -------------
 sub add_oid_entry {
     my ($self, $oid, $type, $value) = @_;
+    croak "*** not implemented ***"
 }
 
 
@@ -196,6 +197,7 @@ sub add_oid_entry {
 # ------------
 sub add_oid_tree {
     my ($self, $oid_tree) = @_;
+    croak "*** not implemented ***"
 }
 
 
