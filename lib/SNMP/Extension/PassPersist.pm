@@ -237,7 +237,7 @@ sub getnext_oid {
     my $next_oid = $self->fetch_next_entry($req_oid)
                 || $self->fetch_first_entry();
 
-    return snmp_get($next_oid);
+    return $self->get_oid($next_oid)
 }
 
 
