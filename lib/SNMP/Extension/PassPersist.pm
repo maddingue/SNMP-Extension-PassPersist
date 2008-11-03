@@ -343,8 +343,23 @@ sub by_oid ($$) {
 
     use SNMP::Extension::PassPersist;
 
-    my $foo = SNMP::Extension::PassPersist->new();
-    ...
+    my $extsnmp = SNMP::Extension::PassPersist->new(
+        backend_collect => \&update_tree
+    );
+    $extsnmp->run;
+
+
+    sub update_tree {
+        my ($self) = @_;
+
+        # add a serie of OID entries
+        $extsnmp->add_oid_entry($oid, $type, $value);
+        ...
+    
+        # or directly add a whole OID tree
+        $extsnmp->add_oid_tree(\%oid_tree);
+    }
+
 
 =head1 DESCRIPTION
 
