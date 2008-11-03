@@ -133,8 +133,8 @@ sub run {
         or croak "fatal: An error while processing runtime arguments";
 
     # collect the information
-    $self->backend_init();
-    $self->backend_collect();
+    $self->backend_init->();
+    $self->backend_collect->();
 
     # Net-SNMP "pass" mode
     if (any {defined $options{$_}} qw<get getnext set>) {
@@ -172,7 +172,7 @@ sub run {
 
             if ($delay <= 0) {
                 # collect information when the timeout has expired
-                self->backend_collect();
+                self->backend_collect->();
 
                 # reset delay
                 $delay = $self->refresh;
