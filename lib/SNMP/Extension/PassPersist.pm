@@ -125,7 +125,7 @@ sub new {
 # run()
 # ---
 sub run {
-    my ($self, ) = @_;
+    my ($self) = @_;
 
     # process command-line arguments
     Getopt::Long::Configure(qw<no_auto_abbrev no_ignore_case>);
