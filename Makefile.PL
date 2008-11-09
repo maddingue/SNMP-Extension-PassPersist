@@ -8,8 +8,16 @@ WriteMakefile(
     VERSION_FROM        => 'lib/SNMP/Extension/PassPersist.pm',
     ABSTRACT_FROM       => 'lib/SNMP/Extension/PassPersist.pm',
     PREREQ_PM => {
+        # prereqs
+        'Class::Accessor'   => '0.30',
+        'Getopt::Long'      => '2.04',
+        'IO::Handle'        => '1.15',
+        'IO::Select'        => '1.10',
+        'List::MoreUtils'   => '0.21',
+        'parent'            => '0.221',
+
         # build/test prereqs
-        'Test::More'    => 0,
+        'Test::More'        => '0.45',
     },
     PL_FILES            => {},
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
