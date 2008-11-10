@@ -93,13 +93,16 @@ sub new {
     @known_attr{@attributes} = (1) x @attributes;
     !$known_attr{$_} && delete $attrs{$_} for keys %attrs;
 
-    # check that mandatory attributes are set
-    croak "error: Backend collector not set"
-        unless defined $attrs{backend_collect} 
-            and ref $attrs{backend_collect} eq "CODE";
+    # check that code attributes are coderefs
+    for my $code_attr (qw<backend_init backend_collect>) {
+        croak "error: Attribute $code_attr must be a code reference"
+            if defined $attrs{$code_attr} and ref $attrs{$code_attr} ne "CODE";
+    }
 
     # default values
     %attrs = (
+        backend_init    => sub {},
+        backend_collect => sub {},
         input       => \*STDIN,
         output      => \*STDOUT,
         oid_tree    => {},
@@ -130,7 +133,7 @@ sub run {
     # process command-line arguments
     Getopt::Long::Configure(qw<no_auto_abbrev no_ignore_case>);
     GetOptions(\my %options, qw<get|g=s  getnext|n=s  set|s=s>)
-        or croak "fatal: An error while processing runtime arguments";
+        or croak "fatal: An error occured while processing runtime arguments";
 
     # collect the information
     $self->backend_init->();
@@ -153,7 +156,7 @@ sub run {
         my $counter = $self->idle_count;
 
         my $io = IO::Select->new;
-        $io->add($self->stdin);
+        $io->add($self->input);
         $self->output->autoflush(1);
 
         while ($needed and $counter > 0) {
@@ -344,6 +347,21 @@ sub by_oid ($$) {
 
 =head1 SYNOPSIS
 
+    # typical setup for a pass programm
+    use SNMP::Extension::PassPersist;
+
+    # create the object
+    my $extsnmp = SNMP::Extension::PassPersist->new;
+
+    # add a few OID entries
+    $extsnmp->add_oid_entry($oid, $type, $value);
+    $extsnmp->add_oid_entry($oid, $type, $value);
+
+    # run the program
+    $extsnmp->run;
+
+
+    # typical setup for a pass_persist program
     use SNMP::Extension::PassPersist;
 
     my $extsnmp = SNMP::Extension::PassPersist->new(
@@ -356,11 +374,11 @@ sub by_oid ($$) {
         my ($self) = @_;
 
         # add a serie of OID entries
-        $extsnmp->add_oid_entry($oid, $type, $value);
+        $self->add_oid_entry($oid, $type, $value);
         ...
     
         # or directly add a whole OID tree
-        $extsnmp->add_oid_tree(\%oid_tree);
+        $self->add_oid_tree(\%oid_tree);
     }
 
 
@@ -377,6 +395,22 @@ sub by_oid ($$) {
 
 L<SNMP::Persist> is another pass_persist backend for writing Net-SNMP 
 extensions, but relies on threads.
+
+The documentation of Net-SNMP, especially the part on how to configure
+a pass or pass_persist extension:
+
+=over
+
+=item *
+
+main site: L<http://www.net-snmp.org/>
+
+=item *
+
+configuring a pass or pass_persist extension:
+L<http://www.net-snmp.org/docs/man/snmpd.conf.html#lbAY>
+
+=back
 
 
 =head1 AUTHOR
