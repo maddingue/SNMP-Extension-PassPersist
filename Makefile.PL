@@ -13,6 +13,7 @@ WriteMakefile(
         'Getopt::Long'      => '2.04',
         'IO::Handle'        => '1.15',
         'IO::Select'        => '1.10',
+        'IO::String'        => '1.00',
         'List::MoreUtils'   => '0.21',
         'parent'            => '0.221',
 
