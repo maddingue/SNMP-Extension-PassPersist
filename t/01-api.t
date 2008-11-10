@@ -35,7 +35,7 @@ my @object_methods = qw(
     fetch_first_entry
 );
 
-my @creator_args = ( backend_collect => sub {} );
+my @creator_args = ();
 
 # tests plan
 plan tests => 1
