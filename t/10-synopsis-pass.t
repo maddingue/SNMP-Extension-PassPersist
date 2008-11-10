@@ -12,7 +12,8 @@ my $module = "SNMP::Extension::PassPersist";
 
 # input data
 my ($oid, $type, $value) = qw<.1.2.3 integer 42>;
-my $input  = "";
+my $input = "";
+my @args  = (-g => $oid);
 
 # expected data
 my %expected_tree = (
@@ -34,7 +35,7 @@ is( $@, "", "add_oid_entry('$oid', '$type', '$value')" );
 is_deeply( $extsnmp->oid_tree, \%expected_tree, "check internal OID tree consistency" );
 
 # execute the main loop
-local @ARGV = (-g => $oid);
+local @ARGV = @args;
 my ($stdin, $stdout) = ( ro_fh(\$input), wo_fh(\my $output) );
 $extsnmp->input($stdin);
 $extsnmp->output($stdout);
