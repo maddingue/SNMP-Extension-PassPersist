@@ -147,7 +147,7 @@ sub run {
                 my @args = split /,/, $options{$op};
                 my $coderef = $self->dispatch->{$op}{code};
                 my @result = $self->$coderef(@args);
-                print join $/, @result, '';
+                print join $/, @result, "";
             }
         }
     }
