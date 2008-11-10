@@ -38,7 +38,7 @@ SUPPORT AND DOCUMENTATION
     You can also look for information at:
 
         RT, CPAN's request tracker
-            http://rt.cpan.org/Dist/Display.html?Queue=SNMP-Extension-PassPersist
+            http://rt.cpan.org/Public/Dist/Display.html?Name=SNMP-Extension-PassPersist
 
         AnnoCPAN, Annotated CPAN documentation
             http://annocpan.org/dist/SNMP-Extension-PassPersist
