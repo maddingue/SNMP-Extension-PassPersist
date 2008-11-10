@@ -35,7 +35,9 @@ is_deeply( $extsnmp->oid_tree, \%expected_tree, "check internal OID tree consist
 
 # execute the main loop
 local @ARGV = (-g => $oid);
-my ($stdin, $stdout) = new_string_fh(\$input, \my $output);
+my ($stdin, $stdout) = ( ro_fh(\$input), wo_fh(\my $output) );
+$extsnmp->input($stdin);
+$extsnmp->output($stdout);
 eval { $extsnmp->run };
 is( $@, "", "\$extsnmp->run" );
 is( $output, $expected_output, "check the output" );
