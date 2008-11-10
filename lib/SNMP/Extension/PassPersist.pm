@@ -147,7 +147,7 @@ sub run {
                 my @args = split /,/, $options{$op};
                 my $coderef = $self->dispatch->{$op}{code};
                 my @result = $self->$coderef(@args);
-                print join $/, @result, "";
+                $self->output->print(join $/, @result, "");
             }
         }
     }
@@ -193,7 +193,7 @@ sub run {
 # -------------
 sub add_oid_entry {
     my ($self, $oid, $type, $value) = @_;
-    croak "*** not implemented ***"
+    $self->oid_tree->{$oid} = [$type => $value];
 }
 
 
