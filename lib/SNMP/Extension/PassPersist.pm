@@ -390,7 +390,9 @@ sub by_oid ($$) {
 
 =head1 DESCRIPTION
 
-....
+This module is a framework for writing Net-SNMP extensions using the
+C<pass> or C<pass_persist> mechanisms.
+
 
 =head1 METHODS
 

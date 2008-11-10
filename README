@@ -6,7 +6,8 @@ NAME
 
 DESCRIPTION
 
-    ...
+    This module is a framework for writing Net-SNMP extensions using the
+    pass or pass_persist mechanisms.
 
 
 INSTALLATION
