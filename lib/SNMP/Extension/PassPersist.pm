@@ -65,9 +65,12 @@ my %snmp_ext_type = (
     counter     => "counter",
     gauge       => "gauge",
     integer     => "integer",
+    ipaddr      => "ipaddress",
     ipaddress   => "ipaddress",
+    netaddr     => "ipaddress",
     objectid    => "objectid",
     octetstr    => "string",
+#   opaque      => "opaque",
     timeticks   => "timeticks",
 );
 
