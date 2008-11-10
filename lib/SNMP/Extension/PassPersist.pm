@@ -38,6 +38,7 @@ my @attributes = qw<
     oid_tree
     output
     refresh
+    dispatch
 >;
 
 __PACKAGE__->mk_accessors(@attributes);
@@ -144,7 +145,8 @@ sub run {
         for my $op (qw<get getnext set>) {
             if ($options{$op}) {
                 my @args = split /,/, $options{$op};
-                my @result = $self->dispatch->{$op}{code}->(@args);
+                my $coderef = $self->dispatch->{$op}{code};
+                my @result = $self->$coderef(@args);
                 print join $/, @result, '';
             }
         }
@@ -175,7 +177,7 @@ sub run {
 
             if ($delay <= 0) {
                 # collect information when the timeout has expired
-                self->backend_collect->();
+                $self->backend_collect->();
 
                 # reset delay
                 $delay = $self->refresh;
@@ -279,7 +281,8 @@ sub process_cmd {
         }
 
         # call the command handler
-        @result = $dispatch->{$cmd}{code}->(@args);
+        my $coderef = $dispatch->{$cmd}{code};
+        @result = $self->$coderef(@args);
     }
     else {
         @result = SNMP_NONE;
