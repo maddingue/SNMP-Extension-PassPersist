@@ -16,6 +16,8 @@ use List::MoreUtils qw(any);
     $VERSION = '0.01';
 }
 
+use constant HAVE_SORT_KEY_OID => eval "use Sort::Key::OID qw<oidsort>; 1"?1:0;
+
 
 =head1 NAME
 
@@ -302,7 +304,9 @@ sub process_cmd {
 sub fetch_next_entry {
     my ($self, $req_oid) = @_;
 
-    my @entries = sort by_oid keys %{ $self->oid_tree };
+    my @entries = HAVE_SORT_KEY_OID
+                ? oidsort(keys %{ $self->oid_tree })
+                : sort by_oid keys %{ $self->oid_tree };
 
     # find the index of the current entry
     my $curr_entry_idx = -1;
@@ -329,7 +333,9 @@ sub fetch_next_entry {
 sub fetch_first_entry {
     my ($self) = @_;
 
-    my @entries = sort by_oid keys %{ $self->oid_tree };
+    my @entries = HAVE_SORT_KEY_OID
+                ? oidsort(keys %{ $self->oid_tree })
+                : sort by_oid keys %{ $self->oid_tree };
     my $first_entry_oid = $entries[0];
 
     return $first_entry_oid
@@ -396,6 +402,9 @@ C<pass> or C<pass_persist> mechanisms.
 When in C<pass_persist> mode, it provides a mechanism to spare
 ressources by quitting from the main loop after a given number of
 idle cycles.
+
+This module can use C<Sort::Key::OID> when it is available, for sorting
+OIDs faster than with the internal pure Perl function.
 
 
 =head1 METHODS
