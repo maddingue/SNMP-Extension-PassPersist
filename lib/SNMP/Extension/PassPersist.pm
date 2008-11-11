@@ -47,19 +47,17 @@ __PACKAGE__->mk_accessors(@attributes);
 
 
 # constants --------------------------------------------------------------------
-use constant {
-    SNMP_NONE               => "NONE",
-    SNMP_PING               => "PING",
-    SNMP_PONG               => "PONG",
-    SNMP_GET                => "get",
-    SNMP_GETNEXT            => "getnext",
-    SNMP_SET                => "set",
-    SNMP_NOT_WRITABLE       => "not-writable",
-    SNMP_WRONG_TYPE         => "wrong-type",
-    SNMP_WRONG_LENGTH       => "wrong-length",
-    SNMP_WRONG_VALUE        => "wrong-value",
-    SNMP_INCONSISTENT_VALUE => "inconsistent-value",
-};
+use constant SNMP_NONE                  => "NONE";
+use constant SNMP_PING                  => "PING";
+use constant SNMP_PONG                  => "PONG";
+use constant SNMP_GET                   => "get";
+use constant SNMP_GETNEXT               => "getnext";
+use constant SNMP_SET                   => "set";
+use constant SNMP_NOT_WRITABLE          => "not-writable";
+use constant SNMP_WRONG_TYPE            => "wrong-type";
+use constant SNMP_WRONG_LENGTH          => "wrong-length";
+use constant SNMP_WRONG_VALUE           => "wrong-value";
+use constant SNMP_INCONSISTENT_VALUE    => "inconsistent-value";
 
 
 # global variables -------------------------------------------------------------
@@ -146,12 +144,12 @@ sub run {
     $self->backend_collect->();
 
     # Net-SNMP "pass" mode
-    if (any {defined $options{$_}} qw<get getnext set>) {
+    if (any {defined $options{$_}} "get", "getnext", "set") {
         for my $op (qw<get getnext set>) {
             if ($options{$op}) {
                 my @args = split /,/, $options{$op};
                 my $coderef = $self->dispatch->{$op}{code};
-                my @result = $self->$coderef(@args);
+                my @result = $coderef->($self, @args);
                 $self->output->print(join $/, @result, "");
             }
         }
@@ -287,7 +285,7 @@ sub process_cmd {
 
         # call the command handler
         my $coderef = $dispatch->{$cmd}{code};
-        @result = $self->$coderef(@args);
+        @result = $coderef->($self, @args);
     }
     else {
         @result = SNMP_NONE;
