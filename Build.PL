@@ -10,11 +10,16 @@ my $builder = Module::Build->new(
     requires => {
         'Class::Accessor'   => '0.30',
         'Getopt::Long'      => '2.04',
+        'File::Temp'        => '0.12',
+        'IO::File'          => '1.05',
         'IO::Handle'        => '1.15',
         'IO::Select'        => '1.10',
         'IO::String'        => '1.00',
         'List::MoreUtils'   => '0.21',
         'parent'            => '0.221',
+    },
+    recommends => {
+        'Sort::Key::OID'    => '0.03',
     },
     build_requires => {
         'Test::More'        => '0.45',
