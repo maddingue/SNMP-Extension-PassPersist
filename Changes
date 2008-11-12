@@ -4,6 +4,7 @@ Revision history for SNMP-Extension-PassPersist
         [CODE] Made the code compatible with Perl 5.6
         [CODE] Implemented add_oid_tree().
         [TESTS] Implemented t/11-new.t, t/12-run.t
+        [EG] Added two examples based on the synopsis in eg/.
 
 0.01    2008.11.11 - Sebastien Aperghis-Tramoni (SAPER)
         First version, released on an unsuspecting world.
