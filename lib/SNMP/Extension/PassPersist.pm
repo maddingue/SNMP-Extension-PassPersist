@@ -82,12 +82,14 @@ my %snmp_ext_type = (
 sub new {
     my ($class, @args) = @_;
     my %attrs;
+    my $ref = ref $args[0];
 
     # see how arguments were passed
-    if (ref $args[0] and ref $args[0] eq "HASH") {
+    if ($ref and $ref eq "HASH") {
         %attrs = %{$args[0]};
     }
     else {
+        croak "error: Don't know how to handle \L$ref reference" if $ref;
         croak "error: Odd number of arguments"  if @args % 2 == 1;
         %attrs = @args;
     }
