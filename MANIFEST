@@ -5,6 +5,8 @@ Makefile.PL
 README
 Changes
 lib/SNMP/Extension/PassPersist.pm
+eg/synopsis-pass.pl
+eg/synopsis-passpersist.pl
 t/00-load.t
 t/01-api.t
 t/10-synopsis-pass.t
