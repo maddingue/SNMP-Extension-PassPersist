@@ -141,9 +141,15 @@ sub run {
     GetOptions(\my %options, qw<get|g=s  getnext|n=s  set|s=s>)
         or croak "fatal: An error occured while processing runtime arguments";
 
+    # initialise the backend
+    eval { $self->backend_init->(); 1 }
+        or croak "fatal: An error occurred while executing the backend "
+                ."initialisation callback: $@";
+
     # collect the information
-    $self->backend_init->();
-    $self->backend_collect->();
+    eval { $self->backend_collect->(); 1 }
+        or croak "fatal: An error occurred while executing the backend "
+                ."collecting callback: $@";
 
     # Net-SNMP "pass" mode
     if (any {defined $options{$_}} "get", "getnext", "set") {
@@ -182,7 +188,9 @@ sub run {
 
             if ($delay <= 0) {
                 # collect information when the timeout has expired
-                $self->backend_collect->();
+                eval { $self->backend_collect->(); 1 }
+                    or croak "fatal: An error occurred while executing "
+                            ."the backend collecting callback: $@";
 
                 # reset delay
                 $delay = $self->refresh;
