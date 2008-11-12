@@ -207,6 +207,7 @@ sub run {
 sub add_oid_entry {
     my ($self, $oid, $type, $value) = @_;
     $self->oid_tree->{$oid} = [$type => $value];
+    return 1
 }
 
 
@@ -214,8 +215,10 @@ sub add_oid_entry {
 # add_oid_tree()
 # ------------
 sub add_oid_tree {
-    my ($self, $oid_tree) = @_;
-    croak "*** not implemented ***"
+    my ($self, $new_tree) = @_;
+    my $oid_tree = $self->oid_tree;
+    @{$oid_tree}{keys %$new_tree} = values %$new_tree;
+    return 1
 }
 
 
