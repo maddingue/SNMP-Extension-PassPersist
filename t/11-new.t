@@ -8,51 +8,51 @@ use SNMP::Extension::PassPersist;
 my $module = "SNMP::Extension::PassPersist";
 my @cases  = (
     {
-        args => [],
+        attr => [],
         diag => qr/^$/,
     },
     {
-        args => [ {} ],
+        attr => [ {} ],
         diag => qr/^$/,
     },
     {
-        args => [ 42 ],
+        attr => [ 42 ],
         diag => qr/^error: Odd number of arguments/,
     },
     {
-        args => [ 1, 2, 3 ],
+        attr => [ 1, 2, 3 ],
         diag => qr/^error: Odd number of arguments/,
     },
     {   # unknown attributes are ignored
-        args => [ foo => "bar" ],
+        attr => [ foo => "bar" ],
         diag => qr/^$/,
     },
     {
-        args => [ { foo => "bar" } ],
+        attr => [ { foo => "bar" } ],
         diag => qr/^$/,
     },
     {
-        args => [ \my $var ],
+        attr => [ \my $var ],
         diag => qr/^error: Don't know how to handle scalar reference/,
     },
     {
-        args => [ [] ],
+        attr => [ [] ],
         diag => qr/^error: Don't know how to handle array reference/,
     },
     {
-        args => [ sub {} ],
+        attr => [ sub {} ],
         diag => qr/^error: Don't know how to handle code reference/,
     },
     {   # checking that code attributes are correctly checked
-        args => [ backend_init => sub {} ],
+        attr => [ backend_init => sub {} ],
         diag => qr/^$/,
     },
     {
-        args => [ backend_init => [] ],
+        attr => [ backend_init => [] ],
         diag => qr/^error: Attribute backend_init must be a code reference/,
     },
     {
-        args => [ backend_init => {} ],
+        attr => [ backend_init => {} ],
         diag => qr/^error: Attribute backend_init must be a code reference/,
     },
 );
@@ -60,8 +60,8 @@ my @cases  = (
 plan tests => ~~@cases;
 
 for my $case (@cases) {
-    my $args = $case->{args};
+    my $attr = $case->{attr};
     my $diag = $case->{diag};
-    my $object = eval { $module->new(@$args) };
-    like( $@, $diag, "$module->new(".join(", ", @$args).")" );
+    my $object = eval { $module->new(@$attr) };
+    like( $@, $diag, "$module->new(".join(", ", @$attr).")" );
 }
