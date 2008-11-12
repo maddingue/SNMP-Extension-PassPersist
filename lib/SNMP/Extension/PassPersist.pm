@@ -71,6 +71,7 @@ my %snmp_ext_type = (
     objectid    => "objectid",
     octetstr    => "string",
 #   opaque      => "opaque",
+    string      => "string",
     timeticks   => "timeticks",
 );
 
@@ -206,7 +207,10 @@ sub run {
 # -------------
 sub add_oid_entry {
     my ($self, $oid, $type, $value) = @_;
+
+    croak "error: Unknown type '$type'" unless exists $snmp_ext_type{$type};
     $self->oid_tree->{$oid} = [$type => $value];
+
     return 1
 }
 
@@ -216,8 +220,12 @@ sub add_oid_entry {
 # ------------
 sub add_oid_tree {
     my ($self, $new_tree) = @_;
+
+    croak "error: Unknown type"
+        if any { !$snmp_ext_type{$_[0]} } values %$new_tree;
     my $oid_tree = $self->oid_tree;
     @{$oid_tree}{keys %$new_tree} = values %$new_tree;
+
     return 1
 }
 
