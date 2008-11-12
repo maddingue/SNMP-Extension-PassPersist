@@ -13,7 +13,7 @@ use List::MoreUtils qw(any);
 
 {
     no strict "vars";
-    $VERSION = '0.01';
+    $VERSION = '0.02';
 }
 
 use constant HAVE_SORT_KEY_OID => eval "use Sort::Key::OID qw<oidsort>; 1"?1:0;
@@ -26,7 +26,7 @@ for Net-SNMP
 
 =head1 VERSION
 
-This is the documentation of C<SNMP::Extension::PassPersist> version 0.01
+This is the documentation of C<SNMP::Extension::PassPersist> version 0.02
 
 =cut
 
