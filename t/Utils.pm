@@ -1,6 +1,8 @@
 use strict;
 use Carp;
 
+use constant USE_IO_STRING => $] <= 5.008;
+
 
 sub ro_fh {
     my @handles = ();
@@ -12,7 +14,7 @@ sub ro_fh {
 
         my $fh = undef;
 
-        if ($] < 5.008) {
+        if (USE_IO_STRING) {
             require IO::String;
             $fh = IO::String->new($stringref);
         }
@@ -39,7 +41,7 @@ sub wo_fh {
 
         my $fh = undef;
 
-        if ($] < 5.008) {
+        if (USE_IO_STRING) {
             require IO::String;
             $fh = IO::String->new($stringref);
         }
