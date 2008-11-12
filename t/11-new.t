@@ -5,7 +5,8 @@ use Test::More;
 use SNMP::Extension::PassPersist;
 
 
-my @cases = (
+my $module = "SNMP::Extension::PassPersist";
+my @cases  = (
     {
         args => [],
         diag => qr/^$/,
@@ -58,12 +59,9 @@ my @cases = (
 
 plan tests => ~~@cases;
 
-my $module = "SNMP::Extension::PassPersist";
-my $object = undef;
-
 for my $case (@cases) {
     my $args = $case->{args};
     my $diag = $case->{diag};
-    $object = eval { $module->new(@$args) };
+    my $object = eval { $module->new(@$args) };
     like( $@, $diag, "$module->new(".join(", ", @$args).")" );
 }
