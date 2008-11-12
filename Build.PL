@@ -8,6 +8,7 @@ my $builder = Module::Build->new(
     dist_author         => 'Sebastien Aperghis-Tramoni <sebastien@aperghis.net>',
     dist_version_from   => 'lib/SNMP/Extension/PassPersist.pm',
     requires => {
+        'perl'              => '5.006',
         'Class::Accessor'   => '0.30',
         'Getopt::Long'      => '2.04',
         'File::Temp'        => '0.12',
