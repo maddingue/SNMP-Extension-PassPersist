@@ -367,8 +367,8 @@ sub fetch_first_entry {
 # sort() sub-function, for sorting by OID
 #
 sub by_oid ($$) {
-    my @a = split /\./, $_[0];
-    my @b = split /\./, $_[1];
+    my (undef, @a) = split /\./, $_[0];
+    my (undef, @b) = split /\./, $_[1];
     my $v = 0;
     $v ||= $a[$_] <=> $b[$_] for 0 .. $#a;
     return $v
