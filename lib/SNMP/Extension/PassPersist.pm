@@ -16,7 +16,8 @@ use List::MoreUtils qw(any);
     $VERSION = '0.02';
 }
 
-use constant HAVE_SORT_KEY_OID => eval "use Sort::Key::OID qw<oidsort>; 1"?1:0;
+use constant HAVE_SORT_KEY_OID
+                    => eval "use Sort::Key::OID 0.04 qw<oidsort>; 1" ? 1 : 0;
 
 
 =head1 NAME
