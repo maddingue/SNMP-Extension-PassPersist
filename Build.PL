@@ -20,7 +20,7 @@ my $builder = Module::Build->new(
         'parent'            => '0.221',
     },
     recommends => {
-        'Sort::Key::OID'    => '0.03',
+        'Sort::Key::OID'    => '0.04',
     },
     build_requires => {
         'Test::More'        => '0.45',
