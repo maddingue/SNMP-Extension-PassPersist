@@ -179,7 +179,8 @@ sub run {
 
             if (my($input) = $io->can_read($delay)) {
                 if (my $cmd = <$input>) {
-                    $self->process_cmd(lc($cmd), $input)
+                    $self->process_cmd(lc($cmd), $input);
+                    $counter = $self->idle_count;
                 }
                 else {
                     $needed = 0

@@ -1,5 +1,9 @@
 Revision history for SNMP-Extension-PassPersist
 
+0.03    2008.12.xx - Sebastien Aperghis-Tramoni (SAPER)
+        [CODE] Fixed a bug regarding how idle cycles are counted, found by
+        Pascal Beringuie.
+
 0.02    2008.11.12 - Sebastien Aperghis-Tramoni (SAPER)
         [CODE] Made the code compatible with Perl 5.6
         [CODE] Implemented add_oid_tree().
