@@ -5,7 +5,7 @@ use warnings;
 use parent qw<Class::Accessor>;
 
 use Carp;
-use Getopt::Long    qw<:config no_auto_abbrev no_ignore_case>;
+use Getopt::Long;
 use IO::Handle;
 use IO::Select;
 use List::MoreUtils qw<any>;
