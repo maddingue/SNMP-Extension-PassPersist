@@ -1,8 +1,8 @@
 Revision history for SNMP-Extension-PassPersist
 
-0.03    2008.12.xx - Sebastien Aperghis-Tramoni (SAPER)
-        [CODE] CPAN-RT#41749: Applied a patch from Kris Beevers to avoid sorting
-        OIDs when it's unnecessary, then optimising it a bit.
+0.03    2008.12.18 - Sebastien Aperghis-Tramoni (SAPER)
+        [CODE] CPAN-RT#41749: Applied a patch from Kris Beevers to avoid
+        sorting OIDs when it's unnecessary, then optimising it a bit.
         [CODE] Fixed a bug regarding how idle cycles are counted, found by
         Pascal Beringuie.
 
