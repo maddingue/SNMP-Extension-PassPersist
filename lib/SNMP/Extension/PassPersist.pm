@@ -39,6 +39,7 @@ my @attributes = qw<
     idle_count
     input
     oid_tree
+    sorted_entries
     output
     refresh
     dispatch
@@ -114,6 +115,7 @@ sub new {
         input       => \*STDIN,
         output      => \*STDOUT,
         oid_tree    => {},
+        sorted_entries  => [],
         idle_count  => 5,
         refresh     => 10,
         dispatch    => {
@@ -213,6 +215,9 @@ sub add_oid_entry {
     croak "error: Unknown type '$type'" unless exists $snmp_ext_type{$type};
     $self->oid_tree->{$oid} = [$type => $value];
 
+    # need to resort
+    @{$self->sorted_entries} = ();
+
     return 1
 }
 
@@ -227,6 +232,9 @@ sub add_oid_tree {
         if any { !$snmp_ext_type{$_[0]} } values %$new_tree;
     my $oid_tree = $self->oid_tree;
     @{$oid_tree}{keys %$new_tree} = values %$new_tree;
+
+    # need to resort
+    @{$self->sorted_entries} = ();
 
     return 1
 }
@@ -325,24 +333,26 @@ sub process_cmd {
 sub fetch_next_entry {
     my ($self, $req_oid) = @_;
 
-    my @entries = HAVE_SORT_KEY_OID
-                ? oidsort(keys %{ $self->oid_tree })
-                : sort by_oid keys %{ $self->oid_tree };
+    if(!@{$self->sorted_entries}) {
+        @{$self->sorted_entries} = HAVE_SORT_KEY_OID
+            ? oidsort(keys %{ $self->oid_tree })
+            : sort by_oid keys %{ $self->oid_tree };
+    }
 
     # find the index of the current entry
     my $curr_entry_idx = -1;
 
-    for my $i (0..$#entries) {
+    for my $i (0..$#{$self->sorted_entries}) {
         # exact match of the requested entry
-        $curr_entry_idx = $i and last if $entries[$i] eq $req_oid;
+        $curr_entry_idx = $i and last if ${$self->sorted_entries}[$i] eq $req_oid;
 
         # prefix match of the requested entry
         $curr_entry_idx = $i - 1
-            if index($entries[$i], $req_oid) >= 0 and $curr_entry_idx == -1;
+            if index(${$self->sorted_entries}[$i], $req_oid) >= 0 and $curr_entry_idx == -1;
     }
 
     # get the next entry if it exists, otherwise none
-    my $next_entry_oid = $entries[$curr_entry_idx + 1] || SNMP_NONE;
+    my $next_entry_oid = ${$self->sorted_entries}[$curr_entry_idx + 1] || SNMP_NONE;
 
     return $next_entry_oid
 }
@@ -354,10 +364,12 @@ sub fetch_next_entry {
 sub fetch_first_entry {
     my ($self) = @_;
 
-    my @entries = HAVE_SORT_KEY_OID
-                ? oidsort(keys %{ $self->oid_tree })
-                : sort by_oid keys %{ $self->oid_tree };
-    my $first_entry_oid = $entries[0];
+    if(!@{$self->sorted_entries}) {
+        @{$self->sorted_entries} = HAVE_SORT_KEY_OID
+            ? oidsort(keys %{ $self->oid_tree })
+            : sort by_oid keys %{ $self->oid_tree };
+    }
+    my $first_entry_oid = ${$self->sorted_entries}[0];
 
     return $first_entry_oid
 }
