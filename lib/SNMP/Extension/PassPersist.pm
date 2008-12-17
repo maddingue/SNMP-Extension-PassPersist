@@ -112,13 +112,13 @@ sub new {
     %attrs = (
         backend_init    => sub {},
         backend_collect => sub {},
-        input       => \*STDIN,
-        output      => \*STDOUT,
-        oid_tree    => {},
+        input           => \*STDIN,
+        output          => \*STDOUT,
+        oid_tree        => {},
         sorted_entries  => [],
-        idle_count  => 5,
-        refresh     => 10,
-        dispatch    => {
+        idle_count      => 5,
+        refresh         => 10,
+        dispatch        => {
             lc(SNMP_PING)    => { nargs => 0,  code => \&ping        },
             lc(SNMP_GET)     => { nargs => 1,  code => \&get_oid     },
             lc(SNMP_GETNEXT) => { nargs => 1,  code => \&getnext_oid },
