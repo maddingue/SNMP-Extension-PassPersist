@@ -241,6 +241,22 @@ sub add_oid_tree {
 
 
 #
+# dump_oid_tree()
+# -------------
+sub dump_oid_tree {
+    my ($self) = @_;
+
+    my $oid_tree = $self->oid_tree;
+    my $output   = $self->output;
+
+    for my $oid (sort by_oid keys %$oid_tree) {
+        my ($type, $value) = @{ $oid_tree->{$oid} };
+        $output->print("$oid ($type) = $value\n");
+    }
+}
+
+
+#
 # ping()
 # ----
 sub ping {
