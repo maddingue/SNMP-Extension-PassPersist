@@ -1,5 +1,9 @@
 Revision history for SNMP-Extension-PassPersist
 
+0.04    2009.03.17 - Sebastien Aperghis-Tramoni (SAPER)
+        [DIST] Seperated build/tests prereqs from run prereqs, and bumped
+        minimum version of File::Temp to 0.14, thanks to Yves Blusseau.
+
 0.03    2008.12.18 - Sebastien Aperghis-Tramoni (SAPER)
         [CODE] CPAN-RT#41749: Applied a patch from Kris Beevers to avoid
         sorting OIDs when it's unnecessary, then optimising it a bit.
