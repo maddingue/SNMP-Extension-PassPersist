@@ -412,7 +412,9 @@ sub by_oid ($$) {
 
 =head1 SYNOPSIS
 
-    # typical setup for a pass programm
+Typical setup for a C<pass> program:
+
+    use strict;
     use SNMP::Extension::PassPersist;
 
     # create the object
@@ -425,8 +427,9 @@ sub by_oid ($$) {
     # run the program
     $extsnmp->run;
 
+Typical setup for a C<pass_persist> program:
 
-    # typical setup for a pass_persist program
+    use strict;
     use SNMP::Extension::PassPersist;
 
     my $extsnmp = SNMP::Extension::PassPersist->new(
