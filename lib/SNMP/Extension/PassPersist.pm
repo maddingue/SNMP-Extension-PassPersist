@@ -229,7 +229,7 @@ sub add_oid_tree {
     my ($self, $new_tree) = @_;
 
     croak "error: Unknown type"
-        if any { !$snmp_ext_type{$_[0]} } values %$new_tree;
+        if any { !$snmp_ext_type{$_->[0]} } values %$new_tree;
     my $oid_tree = $self->oid_tree;
     @{$oid_tree}{keys %$new_tree} = values %$new_tree;
 
