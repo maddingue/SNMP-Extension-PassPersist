@@ -6,9 +6,13 @@ use parent qw<Class::Accessor>;
 
 use Carp;
 use Getopt::Long;
+use File::Basename;
 use IO::Handle;
+use IO::Pipe;
 use IO::Select;
 use List::MoreUtils qw<any>;
+use Storable            qw< nfreeze thaw >;
+use Sys::Syslog;
 
 
 {
@@ -37,6 +41,7 @@ my @attributes = qw<
     backend_collect
     backend_fork
     backend_init
+    backend_pipe
     idle_count
     input
     oid_tree
@@ -147,6 +152,9 @@ sub run {
     GetOptions(\my %options, qw<get|g=s  getnext|n=s  set|s=s>)
         or croak "fatal: An error occured while processing runtime arguments";
 
+    my $name = $::COMMAND || basename($0);
+    openlog($name, "ndelay,pid", "local0");
+
     my ($mode_pass, $mode_passpersist);
     my $backend_fork = $self->backend_fork;
 
@@ -190,14 +198,39 @@ sub run {
         my $needed  = 1;
         my $delay   = $self->refresh;
         my $counter = $self->idle_count;
+        my ($pipe, $child);
 
         my $io = IO::Select->new;
         $io->add($self->input);
         $self->output->autoflush(1);
 
+        # if the backend is to be run in a separate process,
+        # create a pipe and fork
+        if ($backend_fork) {
+            $pipe = IO::Pipe->new;
+            $self->backend_pipe($pipe);
+            $io->add($pipe);
+
+            $child = fork;
+            my $msg = "fatal: can't fork: $!";
+            syslog err => $msg and die $msg
+                unless defined $child;
+
+            # child setup is handled in run_backend_loop()
+            goto &run_backend_loop if $child == 0;
+
+            # parent setup
+            $pipe->reader;  # declare this end of the pipe as the reader
+            $pipe->autoflush(1);
+            $SIG{CHLD} = sub { $io->remove($pipe); waitpid($child, 0); };
+        }
+
+
+        # main loop
         while ($needed and $counter > 0) {
             my $start_time = time;
 
+            # wait for some input data
             my @ready = $io->can_read($delay);
 
             for my $fh (@ready) {
@@ -211,21 +244,93 @@ sub run {
                         $needed = 0
                     }
                 }
+
+                # handle input data from the backend process
+                if ($backend_fork and $fh == $pipe) {
+                    use bytes;
+
+                    # read a first chunk from the child
+                    $fh->sysread(my $buffer, 20);
+                    last unless length $buffer;
+
+                    # extract the header
+                    my $headline= substr($buffer, 0, index($buffer, "\n")+1, "");
+                    chomp $headline;
+                    my %header  = map { split /=/, $_, 2 } split /\|/, $headline;
+
+                    # read the date in Storable format
+                    my $length  = $header{length};
+                    $fh->sysread(my $freezed, $length);
+                    $freezed    = $buffer.$freezed;
+
+                    # decode the freezed data
+                    my $struct  = thaw($freezed);
+                    $self->add_oid_tree($struct);
+                }
             }
 
             $delay = $delay - (time() - $start_time);
 
             if ($delay <= 0) {
-                # collect information when the timeout has expired
-                eval { $self->backend_collect->(); 1 }
-                    or croak "fatal: An error occurred while executing "
-                            ."the backend collecting callback: $@";
+                if (not $backend_fork) {
+                    # collect information when the timeout has expired
+                    eval { $self->backend_collect->(); 1 }
+                        or croak "fatal: An error occurred while executing "
+                                ."the backend collecting callback: $@";
+                }
 
                 # reset delay
                 $delay = $self->refresh;
                 $counter--;
             }
         }
+
+        if ($backend_fork) {
+            kill TERM => $child;
+            sleep 1;
+            kill KILL => $child;
+            waitpid($child, 0);
+        }
+    }
+}
+
+
+#
+# run_backend_loop()
+# ----------------
+sub run_backend_loop {
+    my ($self) = @_;
+
+    my $pipe = $self->backend_pipe;
+    $pipe->writer;  # declare this end of the pipe as the writer
+    $pipe->autoflush(1);
+
+    # execute the initialisation callback
+    eval { $self->backend_init->(); 1 }
+        or croak "fatal: An error occurred while executing the backend "
+                ."initialisation callback: $@";
+
+    while (1) {
+        my $start_time = time;
+
+        # execute the collect callback
+        eval { $self->backend_collect->(); 1 }
+            or croak "fatal: An error occurred while executing the backend "
+                    ."collecting callback: $@";
+
+        # freeze the OID tree using Storable
+        use bytes;
+        my $freezed = nfreeze($self->oid_tree);
+        my $length  = length $freezed;
+        my $output  = "length=$length\n$freezed";
+
+        # send it to the parent via the pipe
+        $pipe->syswrite($output);
+        select(undef, undef, undef, .000_001);
+
+        # wait before next execution
+        my $delay = $self->refresh() - (time() - $start_time);
+        sleep $delay;
     }
 }
 
@@ -567,6 +672,11 @@ process. Default value is false.
 Set the code reference for a backend callback that will be called only
 once, at the beginning of C<run()>, just after parsing the command-line
 arguments. See also L<"CALLBACKS">.
+
+=head2 backend_pipe
+
+Contains the pipe used to communicate with the backend child, when executed
+in a separate process.
 
 =head2 dispatch
 
