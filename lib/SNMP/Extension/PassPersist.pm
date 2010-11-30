@@ -198,13 +198,18 @@ sub run {
         while ($needed and $counter > 0) {
             my $start_time = time;
 
-            if (my($input) = $io->can_read($delay)) {
-                if (my $cmd = <$input>) {
-                    $self->process_cmd(lc($cmd), $input);
-                    $counter = $self->idle_count;
-                }
-                else {
-                    $needed = 0
+            my @ready = $io->can_read($delay);
+
+            for my $fh (@ready) {
+                # handle input data from netsnmpd
+                if ($fh == $self->input) {
+                    if (my $cmd = <$fh>) {
+                        $self->process_cmd(lc($cmd), $fh);
+                        $counter = $self->idle_count;
+                    }
+                    else {
+                        $needed = 0
+                    }
                 }
             }
 
