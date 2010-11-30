@@ -170,7 +170,7 @@ sub run {
 
     # execute the init and collect callback once, except in the case
     # where the backend run in a separate process
-    if ($mode_passpersist and $backend_fork) {
+    unless ($mode_passpersist and $backend_fork) {
         # initialise the backend
         eval { $self->backend_init->(); 1 }
             or croak "fatal: An error occurred while executing the backend "
