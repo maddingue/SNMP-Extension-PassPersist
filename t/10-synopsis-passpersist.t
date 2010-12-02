@@ -40,15 +40,19 @@ sub update_tree {
     $i++;
 }
 
-# execute the main loop
+# prepare the input and output
 my $fh = File::Temp->new;
 $fh->print($input);
 $fh->close;
 my ($stdin, $stdout) = ( IO::File->new($fh->filename), wo_fh(\my $output) );
+
+# configure the object for the test
 $extsnmp->input($stdin);
 $extsnmp->output($stdout);
 $extsnmp->idle_count(1);
 $extsnmp->refresh(1);
+
+# execute the main loop
 eval { $extsnmp->run };
 is( $@, "", "\$extsnmp->run" );
 is( $output, $expected_output, "check the output" );
