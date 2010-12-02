@@ -200,16 +200,11 @@ sub run {
         my $counter = $self->idle_count;
         my ($pipe, $child);
 
-        my $io = IO::Select->new;
-        $io->add($self->input);
-        $self->output->autoflush(1);
-
         # if the backend is to be run in a separate process,
         # create a pipe and fork
         if ($backend_fork) {
             $pipe = IO::Pipe->new;
             $self->backend_pipe($pipe);
-            $io->add($pipe);
 
             $child = fork;
             my $msg = "fatal: can't fork: $!";
@@ -222,6 +217,14 @@ sub run {
             # parent setup
             $pipe->reader;  # declare this end of the pipe as the reader
             $pipe->autoflush(1);
+        }
+
+        my $io = IO::Select->new;
+        $io->add($self->input);
+        $self->output->autoflush(1);
+
+        if ($backend_fork) {
+            $io->add($pipe);
             $SIG{CHLD} = sub { $io->remove($pipe); waitpid($child, 0); };
         }
 
