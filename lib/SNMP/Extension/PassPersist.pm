@@ -609,11 +609,13 @@ See L<"ATTRIBUTES"> for the list of available attributes.
 
 B<Examples:>
 
-    # for a "pass" command, most attributes are useless
+For a C<pass> command, most attributes are useless:
+
     my $extsnmp = SNMP::Extension::PassPersist->new;
 
-    # for a "pass_persist" command, you'll usually want to
-    # at least set the backend_collect callback
+For a C<pass_persist> command, you'll usually want to at least set the
+C<backend_collect> callback:
+
     my $extsnmp = SNMP::Extension::PassPersist->new(
         backend_collect => \&update_tree,
         idle_count      => 10,      # no more than 10 idle cycles
@@ -641,10 +643,10 @@ call the backend collect callback a first time
 
 =back
 
-Then, when in "pass" mode, the corresponding SNMP command is executed,
+Then, when in C<pass> mode, the corresponding SNMP command is executed,
 its result is printed on the output filehandle, and C<run()> returns.
 
-When in "pass_persist" mode, C<run()> enters a loop, reading Net-SNMP
+When in C<pass_persist> mode, C<run()> enters a loop, reading Net-SNMP
 queries on its input filehandle, processing them, and printing result
 on its output filehandle. The backend collect callback is called every
 C<refresh> seconds. If no query is read from the input after C<idle_count>
@@ -822,7 +824,7 @@ L<SNMP::Persist> is another pass_persist backend for writing Net-SNMP
 extensions, but relies on threads.
 
 The documentation of Net-SNMP, especially the part on how to configure
-a pass or pass_persist extension:
+a C<pass> or C<pass_persist> extension:
 
 =over
 
