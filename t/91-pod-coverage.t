@@ -15,5 +15,7 @@ plan skip_all => "Pod::Coverage $min_pc required for testing POD coverage"
     unless eval "use Pod::Coverage $min_pc; 1";
 
 all_pod_coverage_ok({
-    also_private => [qw<^by_oid$ ^fetch_ ^[gs]et.*oid$ ^ping$ ^process_cmd$>]
+    also_private => [qw<
+        ^by_oid$ ^fetch_ ^[gs]et.*oid$ ^ping$ ^process_cmd$ ^run_backend_loop$
+    >]
 });
