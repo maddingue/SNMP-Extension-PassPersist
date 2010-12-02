@@ -30,6 +30,7 @@ my @attributes = qw<
     backend_fork
     backend_init
     backend_pipe
+    heap
     idle_count
     input
     oid_tree
@@ -107,6 +108,7 @@ sub new {
         backend_collect => sub {},
         backend_fork    => 0,
         backend_init    => sub {},
+        heap            => {},
         input           => \*STDIN,
         output          => \*STDOUT,
         oid_tree        => {},
@@ -702,6 +704,10 @@ where the SNMP command is always in lowercase, C<nargs> gives the number
 of arguments expected by the command and C<code> the callback reference.
 
 You should not modify this table unless you really know what you're doing.
+
+=head2 heap
+
+Give access to the heap.
 
 =head2 idle_count
 
