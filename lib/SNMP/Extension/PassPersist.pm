@@ -833,7 +833,7 @@ main site: L<http://www.net-snmp.org/>
 =item *
 
 configuring a pass or pass_persist extension:
-L<http://www.net-snmp.org/docs/man/snmpd.conf.html#lbAY>
+L<http://www.net-snmp.org/docs/man/snmpd.conf.html#lbBB>
 
 =back
 
