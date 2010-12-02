@@ -160,12 +160,12 @@ sub run {
     # where the backend run in a separate process
     unless ($mode_passpersist and $backend_fork) {
         # initialise the backend
-        eval { $self->backend_init->(); 1 }
+        eval { $self->backend_init->($self); 1 }
             or croak "fatal: An error occurred while executing the backend "
                     ."initialisation callback: $@";
 
         # collect the information
-        eval { $self->backend_collect->(); 1 }
+        eval { $self->backend_collect->($self); 1 }
             or croak "fatal: An error occurred while executing the backend "
                     ."collecting callback: $@";
     }
@@ -265,7 +265,7 @@ sub run {
             if ($delay <= 0) {
                 if (not $backend_fork) {
                     # collect information when the timeout has expired
-                    eval { $self->backend_collect->(); 1 }
+                    eval { $self->backend_collect->($self); 1 }
                         or croak "fatal: An error occurred while executing "
                                 ."the backend collecting callback: $@";
                 }
@@ -297,7 +297,7 @@ sub run_backend_loop {
     $pipe->autoflush(1);
 
     # execute the initialisation callback
-    eval { $self->backend_init->(); 1 }
+    eval { $self->backend_init->($self); 1 }
         or croak "fatal: An error occurred while executing the backend "
                 ."initialisation callback: $@";
 
@@ -305,7 +305,7 @@ sub run_backend_loop {
         my $start_time = time;
 
         # execute the collect callback
-        eval { $self->backend_collect->(); 1 }
+        eval { $self->backend_collect->($self); 1 }
             or croak "fatal: An error occurred while executing the backend "
                     ."collecting callback: $@";
 

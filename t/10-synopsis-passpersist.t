@@ -33,9 +33,9 @@ my $i = 1;
 
 sub update_tree {
     my ($self) = @_;
-    eval { $extsnmp->add_oid_entry($oid, $type, $value) };
+    eval { $self->add_oid_entry($oid, $type, $value) };
     is( $@, "", "[$i] update_tree(): add_oid_entry('$oid', '$type', '$value')" );
-    is_deeply( $extsnmp->oid_tree, \%expected_tree,
+    is_deeply( $self->oid_tree, \%expected_tree,
         "[$i] update_tree(): check internal OID tree consistency" );
     $i++;
 }

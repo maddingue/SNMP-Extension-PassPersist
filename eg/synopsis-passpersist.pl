@@ -14,6 +14,6 @@ sub update_tree {
     my ($self) = @_;
 
     # add a few OID entries
-    $extsnmp->add_oid_entry(".1.2.42.1", "integer", 42);
-    $extsnmp->add_oid_entry(".1.2.42.2", "string" , "the answer");
+    $self->add_oid_entry(".1.2.42.1", "integer", 42);
+    $self->add_oid_entry(".1.2.42.2", "string" , "the answer");
 }
