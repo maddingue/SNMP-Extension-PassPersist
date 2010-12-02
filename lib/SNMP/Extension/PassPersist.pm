@@ -671,8 +671,7 @@ therefore be passed as arguments to C<new()> or called as object methods.
 
 =head2 backend_collect
 
-Set the code reference for a backend callback that will be called every
-C<refresh> seconds to update the OID tree. See also L<"CALLBACKS">.
+Set the code reference for the I<collect> callback. See also L<"CALLBACKS">.
 
 =head2 backend_fork
 
@@ -681,9 +680,7 @@ process. Default value is false.
 
 =head2 backend_init
 
-Set the code reference for a backend callback that will be called only
-once, at the beginning of C<run()>, just after parsing the command-line
-arguments. See also L<"CALLBACKS">.
+Set the code reference for the I<init> callback. See also L<"CALLBACKS">.
 
 =head2 backend_pipe
 
@@ -746,7 +743,77 @@ to update the OID tree.
 
 =head1 CALLBACKS
 
-...
+The callbacks are invoked with the corresponding object as first argument,
+as for a normal method. A heap is available for storing user-defined data.
+
+In the specific case of a programm running in C<pass_persist> mode with
+a forked backend, the callbacks are only executed in the child process
+(the forked backend).
+
+The currently implemented callbacks are:
+
+=over
+
+=item * init
+
+This callback is called once, before the first I<collect> invocation
+and before the main loop. It can be accessed and modified through the
+C<backend_init> attribute.
+
+=item * collect
+
+This callback is called every C<refresh> seconds so the user can update
+the OID tree using the C<add_oid_entry()> and C<add_oid_tree()> methods.
+
+=back
+
+=head2 Examples
+
+For simple needs, only the I<collect> callback needs to be defined:
+
+    my $extsnmp = SNMP::Extension::PassPersist->new(
+        backend_collect => \&update_tree,
+    );
+
+    sub update_tree {
+        my ($self) = @_;
+
+        # fetch the number of running processes
+        my $nb_proc = @{ Proc::ProcessTable->new->table };
+
+        $self->add_oid_entry("1.3.6.1.4.1.32272.10", gauge", $nb_proc);
+    }
+
+A more advanced example is when there is a need to connect to a database,
+in which case both the I<init> and I<collect> callback need to be defined:
+
+    my $extsnmp = SNMP::Extension::PassPersist->new(
+        backend_init    => \&connect_db,
+        backend_collect => \&update_tree,
+    );
+
+    sub connect_db {
+        my ($self) = @_;
+        my $heap = $self->heap;
+
+        # connect to a database
+        my $dbh = DBI->connect($dsn, $user, $password);
+        $heap->{dbh} = $dbh;
+    }
+
+    sub update_tree {
+        my ($self) = @_;
+        my $heap = $self->heap;
+
+        # fetch the number of records from a given table
+        my $dbh = $heap->{dbh};
+        my $sth = $dbh->prepare_cached("SELECT count(*) FROM whatever");
+        $sth->execute;
+        my ($count) = $sth->fetchrow_array;
+
+        $self->add_oid_entry("1.3.6.1.4.1.32272.20", "gauge", $count);
+    }
+
 
 
 =head1 SEE ALSO
