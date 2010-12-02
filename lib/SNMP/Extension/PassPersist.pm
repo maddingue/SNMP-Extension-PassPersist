@@ -24,18 +24,6 @@ use constant HAVE_SORT_KEY_OID
                     => eval "use Sort::Key::OID 0.04 qw<oidsort>; 1" ? 1 : 0;
 
 
-=head1 NAME
-
-SNMP::Extension::PassPersist - Generic pass/pass_persist extension framework
-for Net-SNMP
-
-=head1 VERSION
-
-This is the documentation of C<SNMP::Extension::PassPersist> version 0.03
-
-=cut
-
-
 # early initialisations --------------------------------------------------------
 my @attributes = qw<
     backend_collect
@@ -541,6 +529,21 @@ sub by_oid ($$) {
 }
 
 
+32272
+
+__END__
+
+
+=head1 NAME
+
+SNMP::Extension::PassPersist - Generic pass/pass_persist extension framework
+for Net-SNMP
+
+
+=head1 VERSION
+
+This is the documentation of C<SNMP::Extension::PassPersist> version 0.03
+
 
 =head1 SYNOPSIS
 
@@ -813,4 +816,4 @@ under the same terms as Perl itself.
 
 =cut
 
-32272
+
