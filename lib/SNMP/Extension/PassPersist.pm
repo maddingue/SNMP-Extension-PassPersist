@@ -657,6 +657,10 @@ Add an entry to the OID tree.
 Merge an OID tree to the main OID tree, using the same structure as
 the one of the OID tree itself.
 
+=head2 dump_oid_tree()
+
+Print a complete listing of the OID tree on the output file handle.
+
 
 =head1 ATTRIBUTES
 
