@@ -488,7 +488,7 @@ sub fetch_next_entry {
 
         # prefix match of the requested entry
         $curr_entry_idx = $i - 1
-            if index($entries->[$i], $req_oid) >= 0 and $curr_entry_idx == -1;
+            if $curr_entry_idx == -1 and index($entries->[$i], $req_oid) >= 0;
     }
 
     # get the next entry if it exists, otherwise none
