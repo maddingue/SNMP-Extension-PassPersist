@@ -487,7 +487,7 @@ sub fetch_next_entry {
         $curr_entry_idx = $i and last if $entries->[$i] eq $req_oid;
 
         # prefix match of the requested entry
-        $curr_entry_idx = $i - 1
+        $curr_entry_idx = $i - 1 and last
             if $curr_entry_idx == -1 and index($entries->[$i], $req_oid) >= 0;
     }
 
