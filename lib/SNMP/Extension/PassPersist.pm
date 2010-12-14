@@ -840,11 +840,6 @@ L<http://www.net-snmp.org/docs/man/snmpd.conf.html#lbBB>
 =back
 
 
-=head1 AUTHOR
-
-SE<eacute>bastien Aperghis-Tramoni, C<< <sebastien at aperghis.net> >>
-
-
 =head1 BUGS
 
 Please report any bugs or feature requests to 
@@ -864,7 +859,7 @@ You can find documentation for this module with the perldoc command.
 
 You can also look for information at:
 
-=over 4
+=over
 
 =item * RT: CPAN's request tracker
 
@@ -885,14 +880,17 @@ L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
 =back
 
 
+=head1 AUTHOR
+
+SE<eacute>bastien Aperghis-Tramoni, C<< <sebastien at aperghis.net> >>
+
+
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 SE<eacute>bastien Aperghis-Tramoni, all rights reserved.
+Copyright 2008-2010 SE<eacute>bastien Aperghis-Tramoni, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
-
 =cut
-
 
