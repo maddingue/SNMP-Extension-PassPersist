@@ -98,7 +98,7 @@ sub run {
             print "$oid;$type;$value\n";
         }
         elsif ($options{format} eq "json") {
-            push @data, { oid => $oid, typz => $type, value => $value };
+            push @data, { oid => $oid, type => $type, value => $value };
         }
         else {
             print "$oid ($type) = $value\n";
