@@ -1,0 +1,66 @@
+=head1 NAME
+
+SNMP::Extension::PassPersist - Generic pass/pass_persist extension 
+framework for Net-SNMP
+
+
+=head1 DESCRIPTION
+
+This module is a framework for writing Net-SNMP extensions using the
+pass or pass_persist mechanisms.
+
+
+=head1 INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Makefile.PL
+    make
+    make test
+    make install
+
+Alternatively, to install with Module::Build, you can use the 
+following commands:
+
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+
+=head1 SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc SNMP::Extension::PassPersist
+
+You can also look for information at:
+
+=over
+
+=item * RT, CPAN's request tracker
+
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=SNMP-Extension-PassPersist>
+
+=item * AnnoCPAN, Annotated CPAN documentation
+
+L<http://annocpan.org/dist/SNMP-Extension-PassPersist>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/SNMP-Extension-PassPersist>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
+
+=back
+
+
+=head1 COPYRIGHT AND LICENCE
+
+Copyright (C) 2008-2010 Sebastien Aperghis-Tramoni
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
