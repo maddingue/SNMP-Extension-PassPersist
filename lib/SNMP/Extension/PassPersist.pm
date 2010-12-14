@@ -482,7 +482,7 @@ sub fetch_next_entry {
     # find the index of the current entry
     my $curr_entry_idx = -1;
 
-    for my $i (0..$#{$self->sorted_entries}) {
+    for my $i (0..$#$entries) {
         # exact match of the requested entry
         $curr_entry_idx = $i and last if $entries->[$i] eq $req_oid;
 
