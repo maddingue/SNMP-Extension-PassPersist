@@ -6,6 +6,7 @@ README
 README.pod
 Changes
 lib/SNMP/Extension/PassPersist.pm
+eg/pseudo-walk
 eg/synopsis-pass.pl
 eg/synopsis-passpersist.pl
 t/00-load.t
