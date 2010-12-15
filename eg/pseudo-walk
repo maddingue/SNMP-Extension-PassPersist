@@ -111,6 +111,8 @@ sub run {
         }
     }
 
+    print to_json(\@data), $/ if $options{format} eq "json";
+
     $process->finish;
 }
 
