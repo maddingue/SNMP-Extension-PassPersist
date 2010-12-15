@@ -1,5 +1,8 @@
 Revision history for SNMP-Extension-PassPersist
 
+0.05    2010.12.15 - Sebastien Aperghis-Tramoni (SAPER)
+        [DIST] Forgot to update MANIFEST.
+
 0.04    2010.12.15 - Sebastien Aperghis-Tramoni (SAPER)
         [BUGFIX] CPAN-RT#46256: Fixed add_oid_tree(), thanks to Simon Brown.
         [BUGFIX] CPAN-RT#43579: Fixed fetch_next_entry(), thanks to Aymeric Blazy.

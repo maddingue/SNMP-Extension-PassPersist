@@ -17,7 +17,7 @@ use Sys::Syslog;
 
 {
     no strict "vars";
-    $VERSION = '0.04';
+    $VERSION = '0.05';
 }
 
 use constant HAVE_SORT_KEY_OID
@@ -544,7 +544,7 @@ for Net-SNMP
 
 =head1 VERSION
 
-This is the documentation of C<SNMP::Extension::PassPersist> version 0.03
+This is the documentation of C<SNMP::Extension::PassPersist> version 0.05
 
 
 =head1 SYNOPSIS
