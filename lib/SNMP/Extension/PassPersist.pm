@@ -17,7 +17,7 @@ use Sys::Syslog;
 
 {
     no strict "vars";
-    $VERSION = '0.03';
+    $VERSION = '0.04';
 }
 
 use constant HAVE_SORT_KEY_OID
