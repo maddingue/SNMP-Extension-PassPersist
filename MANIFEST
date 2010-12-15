@@ -14,6 +14,7 @@ t/10-synopsis-pass.t
 t/10-synopsis-passpersist.t
 t/11-new.t
 t/12-run.t
+t/50-walk.t
 t/90-pod.t
 t/91-pod-coverage.t
 t/Utils.pm
