@@ -72,9 +72,10 @@ sub run {
     my @data;
 
     while ($process->pumpable) {
-        my $get = $i++ == 1 ? "get" : "getnext";
-        $in = "$get\n$oid\n";
-        print "--> $get\n--> $oid\n" if $options{debug};
+        $oid = $oid eq "NONE" ? $first_oid : $oid;
+        $in = "getnext\n$oid\n";
+        print "--> getnext\n--> $oid\n" if $options{debug};
+
         $process->pump until index($out, $/) > 0;
         ($oid, my $type, my $value) = split /$\//, $out;
         $out =~ s/^/<-- /gm, print $out if $options{debug};
