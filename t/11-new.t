@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use Test::More;
+use lib "t/lib";
 use SNMP::Extension::PassPersist;
 
 

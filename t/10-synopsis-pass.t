@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Test::More;
-use lib "t";
+use lib "t/lib";
 use Utils;
 
 

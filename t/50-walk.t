@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
+use lib "t/lib";
 
 
 plan skip_all => "JSON not available"       unless eval "use JSON; 1";

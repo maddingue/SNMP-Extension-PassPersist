@@ -4,7 +4,7 @@ use warnings;
 use Test::More;
 use File::Temp ();
 use IO::File;
-use lib "t";
+use lib "t/lib";
 use Utils;
 
 
