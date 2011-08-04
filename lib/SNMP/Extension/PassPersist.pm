@@ -531,7 +531,7 @@ sub by_oid ($$) {
 }
 
 
-32272
+__PACKAGE__
 
 __END__
 
