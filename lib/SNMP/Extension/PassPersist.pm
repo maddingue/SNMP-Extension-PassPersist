@@ -2,7 +2,7 @@ package SNMP::Extension::PassPersist;
 use strict;
 use warnings;
 
-use parent qw<Class::Accessor>;
+use parent qw< Class::Accessor >;
 
 use Carp;
 use Getopt::Long;
@@ -10,7 +10,7 @@ use File::Basename;
 use IO::Handle;
 use IO::Pipe;
 use IO::Select;
-use List::MoreUtils qw<any>;
+use List::MoreUtils     qw< any >;
 use Storable            qw< nfreeze thaw >;
 use Sys::Syslog;
 
