@@ -1,5 +1,8 @@
 Revision history for SNMP-Extension-PassPersist
 
+        [TESTS] Added a mock version of Sys::Syslog to avoid useless dies
+        when running with old versions of the module in white boxes.
+
 0.05    2010.12.15 - Sebastien Aperghis-Tramoni (SAPER)
         [DIST] Forgot to update MANIFEST.
 
