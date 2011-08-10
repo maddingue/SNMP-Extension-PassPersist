@@ -24,11 +24,12 @@ WriteMakefile(
     },
     META_MERGE => {
         resources       => {
-            repository  => {
-                type    => "git",
-                url     => "git://github.com/maddingue/SNMP-Extension-PassPersist.git",
-                web     => "https://github.com/maddingue/SNMP-Extension-PassPersist",
-            }
+            repository  => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #{
+            #    type    => "git",
+            #    url     => "git://github.com/maddingue/SNMP-Extension-PassPersist.git",
+            #    web     => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #}
         },
     },
     PL_FILES            => {},

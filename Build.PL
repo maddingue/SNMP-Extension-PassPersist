@@ -27,11 +27,12 @@ my $builder = Module::Build->new(
     },
     meta_merge => {
         resources       => {
-            repository  => {
-                type    => "git",
-                url     => "git://github.com/maddingue/SNMP-Extension-PassPersist.git",
-                web     => "https://github.com/maddingue/SNMP-Extension-PassPersist",
-            }
+            repository  => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #{
+            #    type    => "git",
+            #    url     => "git://github.com/maddingue/SNMP-Extension-PassPersist.git",
+            #    web     => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #}
         },
     },
     add_to_cleanup      => [ 'SNMP-Extension-PassPersist-*' ],
