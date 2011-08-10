@@ -891,7 +891,7 @@ SE<eacute>bastien Aperghis-Tramoni, C<< <sebastien at aperghis.net> >>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008-2010 SE<eacute>bastien Aperghis-Tramoni, all rights reserved.
+Copyright 2008-2011 SE<eacute>bastien Aperghis-Tramoni, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
