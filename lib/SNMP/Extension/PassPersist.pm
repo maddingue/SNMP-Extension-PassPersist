@@ -861,9 +861,17 @@ You can also look for information at:
 
 =over
 
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
+
+=item * Meta CPAN
+
+L<https://metacpan.org/release/SNMP-Extension-PassPersist>
+
 =item * RT: CPAN's request tracker
 
-L<http://rt.cpan.org/Dist/Display.html?Queue=SNMP-Extension-PassPersist>
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=SNMP-Extension-PassPersist>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
@@ -872,10 +880,6 @@ L<http://annocpan.org/dist/SNMP-Extension-PassPersist>
 =item * CPAN Ratings
 
 L<http://cpanratings.perl.org/d/SNMP-Extension-PassPersist>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
 
 =back
 
