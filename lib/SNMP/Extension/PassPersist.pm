@@ -783,7 +783,7 @@ For simple needs, only the I<collect> callback needs to be defined:
         # fetch the number of running processes
         my $nb_proc = @{ Proc::ProcessTable->new->table };
 
-        $self->add_oid_entry("1.3.6.1.4.1.32272.10", gauge", $nb_proc);
+        $self->add_oid_entry(".1.3.6.1.4.1.32272.10", gauge", $nb_proc);
     }
 
 A more advanced example is when there is a need to connect to a database,
@@ -813,7 +813,7 @@ in which case both the I<init> and I<collect> callback need to be defined:
         $sth->execute;
         my ($count) = $sth->fetchrow_array;
 
-        $self->add_oid_entry("1.3.6.1.4.1.32272.20", "gauge", $count);
+        $self->add_oid_entry(".1.3.6.1.4.1.32272.20", "gauge", $count);
     }
 
 
