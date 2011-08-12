@@ -1,5 +1,6 @@
 Revision history for SNMP-Extension-PassPersist
 
+0.06    2011.08.12 - Sebastien Aperghis-Tramoni (SAPER)
         [TESTS] Added a mock version of Sys::Syslog to avoid useless dies
         when running with old versions of the module in white boxes.
         [TESTS] t/90-pod.t also makes use of Pod::Checker.
