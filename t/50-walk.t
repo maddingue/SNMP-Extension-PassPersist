@@ -27,7 +27,7 @@ my ($in, $out, $err) = ("", "", "");
 
 # execute the SNMP extension
 my $r = IPC::Run::run(\@cmd, \$in, \$out, \$err);
-ok( $r, "run(@cmd)" );
+ok( $r, "run(@cmd)" ) or diag "exec error: $err";
 
 # decode the JSON output
 my $tree = eval { from_json($out) };
