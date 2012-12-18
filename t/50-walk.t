@@ -30,6 +30,7 @@ my $r = IPC::Run::run(\@cmd, \$in, \$out, \$err);
 ok( $r, "run(@cmd)" ) or diag "exec error: $err";
 
 # decode the JSON output
+$out =~ s/[\x00-\x1f]//g;  # remove all control chars
 my $tree = eval { from_json($out) };
 is( $@, "", "decode the JSON output" );
 
