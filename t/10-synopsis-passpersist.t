@@ -33,6 +33,7 @@ my $i = 1;
 
 sub update_tree {
     my ($self) = @_;
+    return if $i > 1;
     eval { $self->add_oid_entry($oid, $type, $value) };
     is( $@, "", "[$i] update_tree(): add_oid_entry('$oid', '$type', '$value')" );
     is_deeply( $self->oid_tree, \%expected_tree,
