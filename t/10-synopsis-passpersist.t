@@ -28,7 +28,7 @@ use_ok($module);
 # create the object
 my $extsnmp = eval { $module->new(backend_collect => \&update_tree) };
 is( $@, "", "$module->new" );
-isa_ok( $extsnmp, $module, "chek that \$extsnmp" );
+isa_ok( $extsnmp, $module, "check that \$extsnmp" );
 my $i = 1;
 
 sub update_tree {
