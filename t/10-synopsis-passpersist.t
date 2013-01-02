@@ -20,7 +20,7 @@ my $input  = "get\n$oid\n";
 my %expected_tree = (
     $oid => [ $type => $value ],
 );
-my $expected_output = join $/, $oid, $type, $value, "";
+my $expected_output = join "\n", $oid, $type, $value, "";
 
 # load the module
 use_ok($module);

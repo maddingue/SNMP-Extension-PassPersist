@@ -180,7 +180,7 @@ sub run {
                 my @args = split /,/, $options{$op};
                 my $coderef = $self->dispatch->{$op}{code};
                 my @result = $coderef->($self, @args);
-                $self->output->print(join $/, @result, "");
+                $self->output->print(join "\n", @result, "");
             }
         }
     }
@@ -462,7 +462,7 @@ sub process_cmd {
     }
 
     # output the result
-    $self->output->print(join $/, @result, "");
+    $self->output->print(join "\n", @result, "");
 }
 
 

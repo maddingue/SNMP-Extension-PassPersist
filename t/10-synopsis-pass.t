@@ -19,7 +19,7 @@ my @args  = (-g => $oid);
 my %expected_tree = (
     $oid => [ $type => $value ],
 );
-my $expected_output = join $/, $oid, $type, $value, "";
+my $expected_output = join "\n", $oid, $type, $value, "";
 
 # load the module
 use_ok($module);

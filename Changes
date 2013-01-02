@@ -1,6 +1,7 @@
 Revision history for SNMP-Extension-PassPersist
 
         [FEATURE] CPAN-RT#82362: Add support for counter64 (Pete Bristow).
+        [CODE] Replaced $/ with explicit "\n" to try fixing tests under Win32.
         [DIST] No longer include README.pod in the CPAN version.
 
 0.06    2011.08.12 - Sebastien Aperghis-Tramoni (SAPER)
