@@ -60,6 +60,7 @@ use constant SNMP_INCONSISTENT_VALUE    => "inconsistent-value";
 # global variables -------------------------------------------------------------
 my %snmp_ext_type = (
     counter     => "counter",
+    counter64   => "counter64",
     gauge       => "gauge",
     integer     => "integer",
     ipaddr      => "ipaddress",
