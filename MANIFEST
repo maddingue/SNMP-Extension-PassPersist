@@ -3,7 +3,6 @@ META.yml
 Build.PL
 Makefile.PL
 README
-README.pod
 Changes
 lib/SNMP/Extension/PassPersist.pm
 eg/pseudo-walk
