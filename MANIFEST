@@ -18,6 +18,7 @@ t/12-run.t
 t/50-walk.t
 t/90-pod.t
 t/91-pod-coverage.t
-t/Utils.pm
+t/lib/Sys/Syslog.pm
+t/lib/Utils.pm
 t/bugs/cpan-rt-43579.pl
 t/bugs/cpan-rt-46256.t

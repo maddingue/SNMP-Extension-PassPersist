@@ -22,6 +22,16 @@ WriteMakefile(
         'IO::String'        => '1.00',
         'Test::More'        => '0.45',
     },
+    META_MERGE => {
+        resources       => {
+            repository  => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #{
+            #    type    => "git",
+            #    url     => "git://github.com/maddingue/SNMP-Extension-PassPersist.git",
+            #    web     => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #}
+        },
+    },
     PL_FILES            => {},
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'SNMP-Extension-PassPersist-*' },

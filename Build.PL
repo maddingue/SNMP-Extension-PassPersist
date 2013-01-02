@@ -25,6 +25,16 @@ my $builder = Module::Build->new(
         'IO::String'        => '1.00',
         'Test::More'        => '0.45',
     },
+    meta_merge => {
+        resources       => {
+            repository  => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #{
+            #    type    => "git",
+            #    url     => "git://github.com/maddingue/SNMP-Extension-PassPersist.git",
+            #    web     => "https://github.com/maddingue/SNMP-Extension-PassPersist",
+            #}
+        },
+    },
     add_to_cleanup      => [ 'SNMP-Extension-PassPersist-*' ],
 );
 

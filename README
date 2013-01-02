@@ -37,6 +37,12 @@ SUPPORT AND DOCUMENTATION
 
     You can also look for information at:
 
+        Search CPAN
+            http://search.cpan.org/dist/SNMP-Extension-PassPersist
+
+        Meta CPAN
+            https://metacpan.org/release/SNMP-Extension-PassPersist
+
         RT, CPAN's request tracker
             http://rt.cpan.org/Public/Dist/Display.html?Name=SNMP-Extension-PassPersist
 
@@ -46,13 +52,10 @@ SUPPORT AND DOCUMENTATION
         CPAN Ratings
             http://cpanratings.perl.org/d/SNMP-Extension-PassPersist
 
-        Search CPAN
-            http://search.cpan.org/dist/SNMP-Extension-PassPersist
-
 
 COPYRIGHT AND LICENCE
 
-    Copyright (C) 2008-2010 Sebastien Aperghis-Tramoni
+    Copyright (C) 2008-2011 Sebastien Aperghis-Tramoni
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

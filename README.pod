@@ -39,6 +39,14 @@ You can also look for information at:
 
 =over
 
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
+
+=item * Meta CPAN
+
+L<https://metacpan.org/release/SNMP-Extension-PassPersist>
+
 =item * RT, CPAN's request tracker
 
 L<http://rt.cpan.org/Public/Dist/Display.html?Name=SNMP-Extension-PassPersist>
@@ -51,16 +59,12 @@ L<http://annocpan.org/dist/SNMP-Extension-PassPersist>
 
 L<http://cpanratings.perl.org/d/SNMP-Extension-PassPersist>
 
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
-
 =back
 
 
 =head1 COPYRIGHT AND LICENCE
 
-Copyright (C) 2008-2010 Sebastien Aperghis-Tramoni
+Copyright (C) 2008-2011 Sebastien Aperghis-Tramoni
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

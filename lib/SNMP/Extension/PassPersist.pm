@@ -2,7 +2,7 @@ package SNMP::Extension::PassPersist;
 use strict;
 use warnings;
 
-use parent qw<Class::Accessor>;
+use parent qw< Class::Accessor >;
 
 use Carp;
 use Getopt::Long;
@@ -10,14 +10,14 @@ use File::Basename;
 use IO::Handle;
 use IO::Pipe;
 use IO::Select;
-use List::MoreUtils qw<any>;
+use List::MoreUtils     qw< any >;
 use Storable            qw< nfreeze thaw >;
 use Sys::Syslog;
 
 
 {
     no strict "vars";
-    $VERSION = '0.05';
+    $VERSION = '0.06';
 }
 
 use constant HAVE_SORT_KEY_OID
@@ -531,7 +531,7 @@ sub by_oid ($$) {
 }
 
 
-32272
+__PACKAGE__
 
 __END__
 
@@ -544,7 +544,7 @@ for Net-SNMP
 
 =head1 VERSION
 
-This is the documentation of C<SNMP::Extension::PassPersist> version 0.05
+This is the documentation of C<SNMP::Extension::PassPersist> version 0.06
 
 
 =head1 SYNOPSIS
@@ -783,7 +783,7 @@ For simple needs, only the I<collect> callback needs to be defined:
         # fetch the number of running processes
         my $nb_proc = @{ Proc::ProcessTable->new->table };
 
-        $self->add_oid_entry("1.3.6.1.4.1.32272.10", gauge", $nb_proc);
+        $self->add_oid_entry(".1.3.6.1.4.1.32272.10", gauge", $nb_proc);
     }
 
 A more advanced example is when there is a need to connect to a database,
@@ -813,7 +813,7 @@ in which case both the I<init> and I<collect> callback need to be defined:
         $sth->execute;
         my ($count) = $sth->fetchrow_array;
 
-        $self->add_oid_entry("1.3.6.1.4.1.32272.20", "gauge", $count);
+        $self->add_oid_entry(".1.3.6.1.4.1.32272.20", "gauge", $count);
     }
 
 
@@ -861,9 +861,17 @@ You can also look for information at:
 
 =over
 
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
+
+=item * Meta CPAN
+
+L<https://metacpan.org/release/SNMP-Extension-PassPersist>
+
 =item * RT: CPAN's request tracker
 
-L<http://rt.cpan.org/Dist/Display.html?Queue=SNMP-Extension-PassPersist>
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=SNMP-Extension-PassPersist>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
@@ -872,10 +880,6 @@ L<http://annocpan.org/dist/SNMP-Extension-PassPersist>
 =item * CPAN Ratings
 
 L<http://cpanratings.perl.org/d/SNMP-Extension-PassPersist>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/SNMP-Extension-PassPersist>
 
 =back
 
@@ -887,7 +891,7 @@ SE<eacute>bastien Aperghis-Tramoni, C<< <sebastien at aperghis.net> >>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008-2010 SE<eacute>bastien Aperghis-Tramoni, all rights reserved.
+Copyright 2008-2011 SE<eacute>bastien Aperghis-Tramoni, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
