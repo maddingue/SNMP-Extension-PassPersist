@@ -4,6 +4,7 @@ use Test::More;
 use lib "t/lib";
 
 
+plan skip_all => "doesn't work under Win32" if $^O =~ /Win32/;
 plan skip_all => "JSON not available"       unless eval "use JSON; 1";
 plan skip_all => "IPC::Run not available"   unless eval "use IPC::Run; 1";
 

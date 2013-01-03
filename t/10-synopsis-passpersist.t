@@ -8,6 +8,7 @@ use lib "t/lib";
 use Utils;
 
 
+plan skip_all => "doesn't work under Win32" if $^O =~ /Win32/;
 plan tests => 7;
 
 my $module = "SNMP::Extension::PassPersist";
