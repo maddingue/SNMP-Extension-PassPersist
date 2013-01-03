@@ -9,12 +9,16 @@ WriteMakefile(
     ABSTRACT_FROM       => 'lib/SNMP/Extension/PassPersist.pm',
     PREREQ_PM => {
         # prereqs
+        'Carp'              => 0,
         'Class::Accessor'   => '0.30',
+        'File::Basename'    => 0,
         'Getopt::Long'      => '2.04',
         'IO::Handle'        => '1.15',
+        'IO::Pipe'          => '1.12',
         'IO::Select'        => '1.10',
         'List::MoreUtils'   => '0.21',
         'parent'            => '0.221',
+        'Sys::Syslog'       => 0,
 
         # build/test prereqs
         'File::Temp'        => '0.14',

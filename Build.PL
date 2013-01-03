@@ -9,12 +9,16 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/SNMP/Extension/PassPersist.pm',
     requires => {
         'perl'              => '5.006',
+        'Carp'              => 0,
         'Class::Accessor'   => '0.30',
+        'File::Basename'    => 0,
         'Getopt::Long'      => '2.04',
         'IO::Handle'        => '1.15',
+        'IO::Pipe'          => '1.12',
         'IO::Select'        => '1.10',
         'List::MoreUtils'   => '0.21',
         'parent'            => '0.221',
+        'Sys::Syslog'       => 0,
     },
     recommends => {
         'Sort::Key::OID'    => '0.04',
