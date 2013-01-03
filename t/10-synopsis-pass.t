@@ -27,7 +27,7 @@ use_ok($module);
 # create the object
 my $extsnmp = eval { $module->new };
 is( $@, "", "$module->new" );
-isa_ok( $extsnmp, $module, "chek that \$extsnmp" );
+isa_ok( $extsnmp, $module, "check that \$extsnmp" );
 
 # add an OID entry
 eval { $extsnmp->add_oid_entry($oid, $type, $value) };
